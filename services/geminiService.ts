@@ -38,13 +38,15 @@ export const generateVirtualTryOn = async (
       }
     });
 
-    // Check for image in response
+    // Check for image in response safely
     const candidates = response.candidates;
     if (candidates && candidates.length > 0) {
-        const parts = candidates[0].content.parts;
-        for (const part of parts) {
-            if (part.inlineData && part.inlineData.data) {
-                return `data:image/png;base64,${part.inlineData.data}`;
+        const content = candidates[0].content;
+        if (content && content.parts) {
+            for (const part of content.parts) {
+                if (part.inlineData && part.inlineData.data) {
+                    return `data:image/png;base64,${part.inlineData.data}`;
+                }
             }
         }
     }

@@ -1,4 +1,4 @@
-import { Gender, ShoeCategory, ShoeOption } from './types';
+import { ShoeCategory, ShoeOption } from './types';
 
 export const MEN_SHOES: ShoeOption[] = [
   {
