@@ -1,7 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-
 /**
  * Sends the image and shoe prompt to Gemini for editing.
  * @param base64Image The base64 encoded string of the original image (without data prefix if possible, but we clean it).
@@ -13,6 +11,14 @@ export const generateVirtualTryOn = async (
   shoeDescription: string
 ): Promise<string> => {
   try {
+    // Validate API Key inside the function to avoid app crash at startup
+    const apiKey = process.env.API_KEY;
+    if (!apiKey) {
+        throw new Error("API Key is missing. Please configure it in your environment variables.");
+    }
+
+    const ai = new GoogleGenAI({ apiKey });
+
     // Ensure clean base64 string
     const cleanBase64 = base64Image.replace(/^data:image\/(png|jpeg|jpg|webp);base64,/, '');
 
