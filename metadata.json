@@ -1,0 +1,7 @@
+{
+  "name": "试鞋",
+  "description": "Snap a photo of your feet and virtually try on various styles of shoes for men and women using Gemini AI.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
