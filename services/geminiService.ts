@@ -1,4 +1,3 @@
-import { GoogleGenAI } from "@google/genai";
 
 /**
  * Sends the image and shoe prompt to Gemini for editing.
@@ -11,11 +10,15 @@ export const generateVirtualTryOn = async (
   shoeDescription: string
 ): Promise<string> => {
   try {
-    // Validate API Key inside the function to avoid app crash at startup
+    // Validate API Key inside the function
     const apiKey = process.env.API_KEY;
     if (!apiKey) {
         throw new Error("API Key is missing. Please configure it in your environment variables.");
     }
+
+    // Dynamically import the SDK to prevent top-level import crashes in browser
+    // if the SDK attempts to access Node.js globals on load.
+    const { GoogleGenAI } = await import("@google/genai");
 
     const ai = new GoogleGenAI({ apiKey });
 

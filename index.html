@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,7 +12,15 @@
         font-family: 'Inter', sans-serif;
       }
     </style>
-<script type="importmap">
+    <!-- Polyfill process to prevent crashes in browser for Node-based libs -->
+    <script>
+      window.process = {
+        env: {
+          NODE_ENV: 'production'
+        }
+      };
+    </script>
+  <script type="importmap">
 {
   "imports": {
     "react": "https://aistudiocdn.com/react@^19.2.0",
